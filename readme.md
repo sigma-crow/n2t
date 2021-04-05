@@ -2,4 +2,4 @@
 
 ## 팀명
 
-리미트 시그마 크로우
+Limit Sigma Crow(LΣC)
