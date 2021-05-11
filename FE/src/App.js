@@ -3,6 +3,7 @@ import * as Pages from '@pages/index';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
 
 import './App.css';
+import StickyFooter from './components/comman/Footer';
 
 function App() {
   return (
