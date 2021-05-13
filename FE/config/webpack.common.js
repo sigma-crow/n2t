@@ -1,6 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 
 module.exports = {
   entry: {
@@ -19,7 +19,7 @@ module.exports = {
       '@hooks': path.resolve(__dirname, '../src/hooks/'),
       '@components': path.resolve(__dirname, '../src/components/'),
       '@styles': path.resolve(__dirname, '../src/styles'),
-      // '@static': path.resolve(__dirname, '../static'),
+      '@static': path.resolve(__dirname, '../static'),
       '@utils': path.resolve(__dirname, '../src/utils/'),
       // '@types': path.resolve(__dirname, '../src/types/'),
       '@layouts': path.resolve(__dirname, '../src/layouts/'),
