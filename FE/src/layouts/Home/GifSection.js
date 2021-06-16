@@ -1,18 +1,17 @@
 import React from 'react';
 import GifPlayer from 'react-gif-player';
-import {makeStyles, useTheme} from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Toolbar from '@material-ui/core/Toolbar';
-import {AppBar, Button, CardActions, Container} from '@material-ui/core';
-import brown from '@material-ui/core/colors/brown';
+import {AppBar, Button, Container} from '@material-ui/core';
 import still from '../../../static/gif-still2.png';
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    margin: '200px auto',
+    margin: '0px auto 200px auto',
   },
   root: {
     height: '46vh',
