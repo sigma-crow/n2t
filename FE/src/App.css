@@ -7,6 +7,21 @@
   pointer-events: none;
 }
 
+#blue {
+  color: blue;
+  /* display: none; */
+}
+#test {
+  display: none;
+
+  /* padding: 0px 6 0px;
+  border: 1px solid black; */
+}
+
+#highlight {
+  background-color: yellow;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
