@@ -1,24 +1,18 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
+import {useHistory} from 'react-router-dom';
+import {SubmitContext} from '@hooks/SubmitAnswer';
 import MarkdownIt from 'markdown-it';
 import styled from 'styled-components';
 import custom from '../custom_rule/index';
 
 const background = '#ffffff';
 
-const Wrapper = styled.form`
-  width: 60%;
-  padding: 50px;
-  padding-bottom: 70px;
-  margin-top: 20px;
-  background: ${background};
-  border-radius: 20px;
-  box-shadow: 0px 3px 3px -2px rgba(0, 0, 0, 0.2),
-    0px 3px 4px 0px rgba(0, 0, 0, 0.14), 0px 1px 8px 0px rgba(0, 0, 0, 0.12);
-`;
+const Wrapper = styled.form``;
 
 let md = new MarkdownIt();
 md = custom(md);
 const HtmlToTest = ({txt}) => {
+  const history = useHistory();
   const tmp = `
     <style type = "text/css">
       #test{
@@ -34,27 +28,51 @@ const HtmlToTest = ({txt}) => {
     </style>
   `;
 
-  const [loding, setloding] = useState('hidden');
+  const [loading, setLoading] = useState('hidden');
   const wrapStyle = {
-    visibility: loding,
+    visibility: loading,
   };
+
+  const {setAnswer, isClick, setClick, setCorrectAnswer} = useContext(
+    SubmitContext,
+  );
+
+  useEffect(() => {
+    if (isClick) {
+      const answers = document.querySelectorAll('test');
+      const tmp = [];
+      answers.forEach((answer) => {
+        tmp.push(answer.firstChild.value);
+      });
+      setAnswer(() => tmp);
+      setClick(false);
+      history.push('/result');
+    }
+  }, [isClick]);
+
   useEffect(() => {
     const testList = document.querySelectorAll('test');
+    setClick(false);
+    const tmp = [];
+    const boundary = document.getElementById('boundary');
+    const maxWidth = boundary.offsetWidth;
+
     testList.forEach((testTag) => {
       const answer = testTag.lastChild;
       const answerWidth = answer.offsetWidth;
       answer.style.display = 'none';
       const textBox = testTag.firstChild;
-      // const answerText = answer.innerText;
-      // textBox.setAttribute('maxlength', `${answerText.length}`);
-      textBox.style.width = `${answerWidth + answerWidth}px`;
+      tmp.push(answer.innerText);
+      textBox.style.width = `${2 * answerWidth}px`;
+      textBox.style.maxWidth = `${maxWidth * 0.7}px`;
     });
-    setloding('visible');
+    setCorrectAnswer(() => tmp);
+    setLoading('visible');
   }, []);
 
   const result = md.render(txt);
   return (
-    <Wrapper>
+    <Wrapper id='answerForm'>
       <div
         className='test'
         style={wrapStyle}

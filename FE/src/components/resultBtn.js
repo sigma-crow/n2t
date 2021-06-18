@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import {SubmitContext} from '../hooks/SubmitAnswer';
 
 const useStyles = makeStyles((theme) => ({
   result: {
@@ -21,9 +22,20 @@ const useStyles = makeStyles((theme) => ({
 
 const ResultBtn = () => {
   const classes = useStyles();
+  const {setClick} = useContext(SubmitContext);
+
+  const SubmitEvent = (e) => {
+    e.preventDefault();
+    setClick(true);
+  };
+
   return (
     <>
-      <Button variant='contained' className={classes.result}>
+      <Button
+        variant='contained'
+        className={classes.result}
+        onClick={SubmitEvent}
+      >
         채점하러 가기
       </Button>
     </>
