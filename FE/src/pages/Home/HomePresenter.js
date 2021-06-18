@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Footer from '@/components/comman/Footer';
 import SectionOne from '@/layouts/Home/SectionOne';
 import GifSection from '@/layouts/Home/GifSection';
 import SectionSearch from '../../layouts/Home/SectionSearch';
@@ -13,11 +14,14 @@ const Container = styled.div`
 `;
 
 const HomePresenter = () => (
-  <Container>
-    <SectionOne />
-    <SectionSearch />
-    <GifSection />
-  </Container>
+  <>
+    <Container>
+      <SectionOne />
+      <SectionSearch />
+      <GifSection />
+    </Container>
+    <Footer />
+  </>
 );
 
 export default HomePresenter;
