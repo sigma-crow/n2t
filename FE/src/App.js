@@ -12,6 +12,7 @@ function App() {
         <Switch>
           <Route exact path='/' component={Pages.MainPage} />
           <Route exact path='/test' component={Pages.TestPage} />
+          <Route exact path='/edit' component={Pages.EditorPage} />
         </Switch>
       </BrowserRouter>
     </>
