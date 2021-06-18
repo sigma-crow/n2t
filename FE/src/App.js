@@ -11,6 +11,7 @@ function App() {
       <BrowserRouter>
         <Switch>
           <Route exact path='/' component={Pages.HomePage} />
+          <Route exact path='/note' component={Pages.MyNotePage} />
           <SubmitAnswer>
             <Route exact path='/test' component={Pages.TestPage} />
             <Route exact path='/result' component={Pages.TestResultPage} />

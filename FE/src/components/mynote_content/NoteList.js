@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
 import {FaChevronDown} from 'react-icons/fa';
+import styled from 'styled-components';
 import DropdownMenu from './dropdown_Menu';
 import NewNoteBtn from './newnote_btn';
-import styled from 'styled-components';
 import Note from './note';
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
