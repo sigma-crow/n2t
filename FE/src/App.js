@@ -12,6 +12,11 @@ function App() {
         <Switch>
           <Route exact path='/' component={Pages.MainPage} />
           <Route exact path='/test' component={Pages.TestPage} />
+          <Route
+            exact
+            path='/searchShared'
+            component={Pages.searchSharedPage}
+          />
         </Switch>
       </BrowserRouter>
     </>
