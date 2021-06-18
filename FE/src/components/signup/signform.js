@@ -123,7 +123,7 @@ const RegisterPage = (props) => {
           </Grid>
           <Grid item xs={12}>
             <TextField
-              className={classes.FormTextField}
+              className={classes.idTextField}
               variant='outlined'
               fullWidth
               value={Email}
@@ -131,6 +131,15 @@ const RegisterPage = (props) => {
               id='email'
               label='이메일'
             />
+
+            <Button
+              className={classes.checkIdButton}
+              size='small'
+              variant='contained'
+              color='primary'
+            >
+              중복확인
+            </Button>
           </Grid>
           <Grid item xs={12}>
             <TextField
