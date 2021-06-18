@@ -27,13 +27,14 @@ const Title = styled.div`
 `;
 
 const AnswerWrapper = styled.div`
-  display: flex;
-  width: 100%;
-  height: 100%;
-  align-items: center;
-  flex-direction: column;
-  // justify-content: center;
-  background: #fffaf6;
+  width: 90%;
+  padding: 50px;
+  padding-bottom: 70px;
+  margin-top: 20px;
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0px 3px 3px -2px rgba(0, 0, 0, 0.2),
+    0px 3px 4px 0px rgba(0, 0, 0, 0.14), 0px 1px 8px 0px rgba(0, 0, 0, 0.12);
 `;
 
 const Answer = () => {
@@ -41,7 +42,7 @@ const Answer = () => {
     <Wrapper>
       <Title>N2T 노트에 대한 답안</Title>
       <AnswerWrapper>
-        <Render.HtmlToTest
+        <Render.StrToHtml
           txt='
           # N2T
 
