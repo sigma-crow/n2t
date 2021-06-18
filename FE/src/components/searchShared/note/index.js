@@ -16,6 +16,7 @@ const Title = styled.div`
   font-weight: ${({theme}) => theme.fontWeight.bold};
   color: black;
   width: 200px;
+  height: 60px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -33,7 +34,7 @@ const Writer = styled.div`
   text-overflow: ellipsis;
   white-space: nowrap;
   padding-right: 25px;
-  padding-top: 15px;
+  padding-top: 10px;
 `;
 
 const Note = ({note}) => {
