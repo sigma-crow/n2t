@@ -1,15 +1,13 @@
-import React, {useState} from 'react';
-import styled from 'styled-components';
+import React from 'react';
+
 import Paper from '@material-ui/core/Paper';
 import {
   Grid,
   Card,
-  CardContent,
   Container,
   IconButton,
   InputBase,
   makeStyles,
-  Typography,
 } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 

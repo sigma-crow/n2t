@@ -16,7 +16,7 @@ const Container = styled.div`
   );
 `;
 
-const Title = styled.h1`
+const Title = styled.div`
   display: block;
   font-size: 88px;
   line-height: 92px;
@@ -28,7 +28,7 @@ const Title = styled.h1`
   font-weight: 700;
 `;
 
-const SubTitle = styled.h2`
+const SubTitle = styled.div`
   width: 600px;
   margin-top: 34px;
   font-size: 20px;
