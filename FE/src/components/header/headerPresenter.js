@@ -1,4 +1,5 @@
 import React from 'react';
+import {useHistory} from 'react-router-dom';
 import styled from 'styled-components';
 import tempLog from '@static/logo.png';
 import HeaderBtn from './HeaderBtn';
@@ -31,10 +32,11 @@ const BtnWrapper = styled.div`
 `;
 
 const HeaderPresenter = () => {
+  const history = useHistory();
   return (
     <>
       <Wrapper>
-        <LogBox />
+        <LogBox onClick={() => history.push('/')} />
         <BtnWrapper>
           <HeaderBtn text='Tutorial' />
           <HeaderBtn text='Login' />
