@@ -14,6 +14,7 @@ function App() {
           <Route exact path='/' component={Pages.MainPage} />
           <Route exact path='/edit' component={Pages.EditorPage} />
           <Route exact path='/note' component={Pages.MyNotePage} />
+          <Route exact path='/find' component={Pages.FindIdPage} />
           <SubmitAnswer>
             <Route exact path='/test' component={Pages.TestPage} />
             <Route exact path='/result' component={Pages.TestResultPage} />
