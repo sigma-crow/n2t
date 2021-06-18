@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import React from 'react';
-import Mynote from '@/components/mynote_content';
-import Sidebar from '@/components/sidebar';
-import Header from '@/components/header';
+import Mynote from '@components/mynote_content';
+import Sidebar from '@components/sidebar';
+import Header from '@components/header';
 
 const Container = styled.div`
   display: flex;
