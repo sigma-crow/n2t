@@ -1,10 +1,14 @@
 import React from 'react';
+import Header from '@components/header';
 import HomePresenter from './HomePresenter';
 
-export default class extends React.Component {
-  state = {};
+const HomeContainer = () => {
+  return (
+    <>
+      <Header />
+      <HomePresenter />
+    </>
+  );
+};
 
-  render() {
-    return <HomePresenter />;
-  }
-}
+export default HomeContainer;

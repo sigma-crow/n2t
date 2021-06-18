@@ -5,7 +5,7 @@ import GifSection from '@/layouts/Home/GifSection';
 import SectionSearch from '../../layouts/Home/SectionSearch';
 
 const Container = styled.div`
-  height: 100%;
+  background: #fffaf6;
   padding: 0px 40px;
   display: flex;
   flex: 2 2 2;
