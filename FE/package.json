@@ -10,6 +10,8 @@
     "@testing-library/user-event": "^12.8.3",
     "axios": "^0.21.1",
     "babel-polyfill": "^6.26.0",
+    "material-ui-search-bar": "^1.0.0",
+    "react-gif-player": "^0.4.2",
     "markdown-it": "^12.0.6",
     "material-ui-search-bar": "^1.0.0",
     "react": "^17.0.2",
