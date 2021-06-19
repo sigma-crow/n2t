@@ -1,20 +1,20 @@
-const { Model } = require("sequelize");
+const { Model } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
   class USERS extends Model {
     static associate(models) {
       this.hasOne(models.auths, {
-        foreignKey: "user_idx",
-        targetKey: "user_idx",
+        foreignKey: 'user_idx',
+        targetKey: 'user_idx',
       });
       this.hasMany(models.folders, {
-        foreignKey: "user_idx",
-        sourceKey: "user_idx",
+        foreignKey: 'user_idx',
+        sourceKey: 'user_idx',
       });
 
       this.hasMany(models.notes, {
-        foreignKey: "user_idx",
-        sourceKey: "user_idx",
+        foreignKey: 'user_idx',
+        sourceKey: 'user_idx',
       });
     }
   }
@@ -47,7 +47,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: "users",
+      modelName: 'users',
       timestamps: false,
     }
   );

@@ -1,21 +1,21 @@
-const { Model } = require("sequelize");
+const { Model } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
   class NOTES extends Model {
     static associate(models) {
       this.belongsTo(models.users, {
-        foreignKey: "user_idx",
-        targetKey: "user_idx",
+        foreignKey: 'user_idx',
+        targetKey: 'user_idx',
       });
       this.belongsTo(models.categories, {
-        foreignKey: "category",
-        targetKey: "category_idx",
-        as: "categoryNote",
+        foreignKey: 'category',
+        targetKey: 'category_idx',
+        as: 'categoryNote',
       });
       this.belongsTo(models.templates, {
-        foreignKey: "template",
-        targetKey: "template_idx",
-        as: "tempateNote",
+        foreignKey: 'template',
+        targetKey: 'template_idx',
+        as: 'tempateNote',
       });
     }
   }
@@ -53,7 +53,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      parent_folder_id: {
+      parent_folder_idx: {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
@@ -70,7 +70,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: "notes",
+      modelName: 'notes',
       timestamps: false,
     }
   );
