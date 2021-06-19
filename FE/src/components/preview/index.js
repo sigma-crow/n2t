@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import {StrToHtml} from '@components/Markdown-it/render';
 
 const Wrapper = styled.div`
   height: auto;
@@ -10,8 +11,14 @@ const Wrapper = styled.div`
   overflow: auto;
 `;
 
-const Preview = ({inputValue}) => {
-  return <Wrapper />;
+const Preview = ({inputText}) => {
+  return (
+    <>
+      <Wrapper>
+        <StrToHtml inputText={inputText} />
+      </Wrapper>
+    </>
+  );
 };
 
 export default Preview;

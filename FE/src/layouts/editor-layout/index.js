@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
 import Editor from '@/components/editor';
 import Preview from '@/components/preview';
@@ -11,10 +11,11 @@ const Wrapper = styled.div`
 `;
 
 const EditorLayout = () => {
+  const [inputText, setInputText] = useState('');
   return (
     <Wrapper>
-      <Editor />
-      <Preview />
+      <Editor props={{inputText, setInputText}} />
+      <Preview inputText={inputText} />
     </Wrapper>
   );
 };
