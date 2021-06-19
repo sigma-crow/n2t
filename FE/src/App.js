@@ -10,8 +10,7 @@ function App() {
     <>
       <BrowserRouter>
         <Switch>
-
-          <Route exact path='/' component={Pages.MainPage} />
+          <Route exact path='/' component={Pages.HomePage} />
           <Route
             exact
             path='/searchShared'

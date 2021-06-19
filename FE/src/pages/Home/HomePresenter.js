@@ -3,7 +3,9 @@ import styled from 'styled-components';
 import Footer from '@/components/comman/Footer';
 import SectionOne from '@/layouts/Home/SectionOne';
 import GifSection from '@/layouts/Home/GifSection';
-import SectionSearch from '../../layouts/Home/SectionSearch';
+import notes from '@/data/notes';
+
+import SearchSection from '@/layouts/Home/SearchSection';
 
 const Container = styled.div`
   background: #fffaf6;
@@ -17,7 +19,7 @@ const HomePresenter = () => (
   <>
     <Container>
       <SectionOne />
-      <SectionSearch />
+      <SearchSection filteredNotes={notes} />
       <GifSection />
     </Container>
     <Footer />
