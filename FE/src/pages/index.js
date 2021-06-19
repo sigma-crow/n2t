@@ -3,5 +3,6 @@ export {default as TestPage} from '@pages/testPage';
 export {default as EditorPage} from '@pages/editorPage';
 export {default as TestResultPage} from '@pages/testResultPage';
 export {default as HomePage} from '@pages/Home';
+export {default as TutorialPage} from '@pages/tutorialPage';
 export {default as MyNotePage} from '@pages/myNotePage';
 export {default as FindIdPage} from '@pages/findIdPage';
