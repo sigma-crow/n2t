@@ -6,3 +6,4 @@ export {default as TestResultPage} from '@pages/testResultPage';
 export {default as HomePage} from '@pages/Home';
 export {default as MyNotePage} from '@pages/myNotePage';
 export {default as FindIdPage} from '@pages/findIdPage';
+export {default as LogInPage} from '@pages/logInPage';
