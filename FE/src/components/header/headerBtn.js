@@ -14,11 +14,11 @@ const Line = styled.div`
   border-left: 1px solid ${({theme}) => theme.color.white};
   margin-left: 10px;
 `;
-const HeaderBtn = ({text}) => {
+const HeaderBtn = ({text, onClick}) => {
   return (
     <>
       <Line />
-      <ButtonWrapper>{text}</ButtonWrapper>
+      <ButtonWrapper onClick={onClick}>{text}</ButtonWrapper>
     </>
   );
 };
