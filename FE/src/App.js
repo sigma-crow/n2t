@@ -30,12 +30,12 @@ function App() {
       <BrowserRouter>
         <Switch>
           <Route exact path='/' component={Pages.HomePage} />
+          <Route exact path='/tutorial' component={Pages.TutorialPage} />
           <Route
             exact
             path='/searchShared'
             component={Pages.searchSharedPage}
           />
-          <Route exact path='/' component={Pages.HomePage} />
           <Route exact path='/edit' component={Pages.EditorPage} />
           <Route exact path='/note' component={Pages.MyNotePage} />
           <Route exact path='/find' component={Pages.FindIdPage} />
