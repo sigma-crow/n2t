@@ -30,7 +30,6 @@ const TextArea = styled.textarea`
   padding-left: 5px;
   padding-top: 10px;
   border-color: #ccc;
-  // overflow-wrap: break-word;
   white-space: pre-line;
   resize: none;
 `;
@@ -53,10 +52,22 @@ const Textarea = ({props}) => {
     setInputText(e.target.value);
   };
 
+  const onKeySave = (e) => {
+    e.preventDefault();
+    if (e.ctrlKey === true && e.keyCode === 83) {
+      console.log('자동저장');
+    }
+  };
+
   return (
     <Wrapper>
       <LineNum>{lineStr}</LineNum>
-      <TextArea autoFocus={false} value={inputText} onChange={onChange} />
+      <TextArea
+        autoFocus={false}
+        value={inputText}
+        onChange={onChange}
+        onKeyDown={onKeySave}
+      />
     </Wrapper>
   );
 };
