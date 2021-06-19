@@ -5,6 +5,7 @@ export const Colors = {
 
 export const FontSize = {
   xs: '18px',
+  s: '20px',
   sm: '24px',
   md: '36px',
   lg: '48px',
