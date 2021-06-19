@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import styled, {ThemeProvider} from 'styled-components';
+import FolderBtn from '../folderBtn';
 
 const Container = styled.div`
   width: 100%;
@@ -20,12 +21,25 @@ const Wrapper = styled.div`
   margin-top: 10px;
   color: white;
 `;
-
 const SubWrapper = styled.div`
   width: 100%;
   height: 48px;
   background: #aa856a;
   color: white;
+`;
+
+const ListWrapper = styled.div`
+  width: 100%;
+  height: 48px;
+`;
+const ContentWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 400px;
+  margin-top: 10px;
+  align-items: flex-end;
+  background: #5f4837;
 `;
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -36,44 +50,61 @@ const useStyles = makeStyles((theme) => ({
 function ListItemLink(props) {
   return <ListItem button component='a' {...props} />;
 }
-
 const MyFolder = () => {
   const classes = useStyles();
+  const [folders, setFolders] = useState([]);
+
+  const addFolder = (folder) => {
+    setFolders([folder, ...folders]);
+    folder.folderName;
+  };
+
+  const folderList = folders.map((item, id) => (
+    <SubWrapper key={id}>
+      <ListItemLink>
+        <ListItemText>{item.folderName}</ListItemText>
+      </ListItemLink>
+    </SubWrapper>
+  ));
   return (
     <Container>
-      <Wrapper>
-        <List
-          className={classes.root}
-          component='nav'
-          aria-label='main mailbox folders'
-        >
-          <ListItem button>
-            <ListItemText primary='MyFoler' />
-          </ListItem>
-        </List>
-      </Wrapper>
-      <SubWrapper>
+      <ContentWrapper>
+        <FolderBtn addFolder={addFolder} />
+        <Wrapper>
+          <List
+            className={classes.root}
+            component='nav'
+            aria-label='main mailbox folders'
+          >
+            <ListItem button>
+              <ListItemText primary='MyFoler' />
+            </ListItem>
+          </List>
+        </Wrapper>
+        {/* <SubWrapper> */}
+        <ListWrapper>
+          <List
+            className={classes.root}
+            component='nav'
+            aria-label='secondary mailbox folders'
+          >
+            {folderList}
+          </List>
+        </ListWrapper>
+
+        {/* </SubWrapper> */}
+        {/* <SubWrapper>
         <List
           className={classes.root}
           component='nav'
           aria-label='secondary mailbox folders'
         >
           <ListItemLink href='#simple-list'>
-            <ListItemText primary='Option1' />
+            <ListItemText primary='Folder2' />
           </ListItemLink>
         </List>
-      </SubWrapper>
-      <SubWrapper>
-        <List
-          className={classes.root}
-          component='nav'
-          aria-label='secondary mailbox folders'
-        >
-          <ListItemLink href='#simple-list'>
-            <ListItemText primary='Option2' />
-          </ListItemLink>
-        </List>
-      </SubWrapper>
+      </SubWrapper> */}
+      </ContentWrapper>
     </Container>
   );
 };
