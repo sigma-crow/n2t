@@ -1,4 +1,5 @@
 import React from 'react';
+import {useHistory} from 'react-router-dom';
 import styled from 'styled-components';
 import tempLog from '@static/logo.png';
 import HeaderBtn from './HeaderBtn';
@@ -12,7 +13,6 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: fixed;
   top: 0;
   left: 0;
   right: 0;
@@ -31,10 +31,11 @@ const BtnWrapper = styled.div`
 `;
 
 const HeaderPresenter = () => {
+  const history = useHistory();
   return (
     <>
       <Wrapper>
-        <LogBox />
+        <LogBox onClick={() => history.push('/')} />
         <BtnWrapper>
           <HeaderBtn text='Tutorial' />
           <HeaderBtn text='Login' />

@@ -11,7 +11,7 @@ const Wrapper = styled.form``;
 
 let md = new MarkdownIt();
 md = custom(md);
-const HtmlToTest = ({txt}) => {
+const Grading = ({txt}) => {
   const history = useHistory();
   const tmp = `
     <style type = "text/css">
@@ -22,7 +22,9 @@ const HtmlToTest = ({txt}) => {
         font-size: 1.2em;
         border: 0px;
         background:${background};
-        border-bottom: 2px #000000 solid;
+        text-decoration:line-through;
+        text-decoration-color: #B22222;
+        border-bottom: 2px #B22222 solid;
         text-align: center;
       }
     </style>
@@ -33,40 +35,33 @@ const HtmlToTest = ({txt}) => {
     visibility: loading,
   };
 
-  const {setAnswer, isClick, setClick, setCorrectAnswer} = useContext(
-    SubmitContext,
-  );
+  const {answer, correctAnswer} = useContext(SubmitContext);
 
   useEffect(() => {
-    if (isClick) {
-      const answers = document.querySelectorAll('test');
-      const tmp = [];
-      answers.forEach((answer) => {
-        tmp.push(answer.firstChild.value);
-      });
-      setAnswer(() => tmp);
-      setClick(false);
-      history.push('/result');
+    if (correctAnswer.length === 0) {
+      alert('비정상적인 접근입니다.');
+      history.goBack();
     }
-  }, [isClick]);
-
-  useEffect(() => {
     const testList = document.querySelectorAll('test');
-    setClick(false);
-    const tmp = [];
     const boundary = document.getElementById('boundary');
     const maxWidth = boundary.offsetWidth;
-
+    let count = 0;
     testList.forEach((testTag) => {
-      const answer = testTag.lastChild;
-      const answerWidth = answer.offsetWidth;
-      answer.style.display = 'none';
+      const answerBox = testTag.lastChild;
       const textBox = testTag.firstChild;
-      tmp.push(answer.innerText);
-      textBox.style.width = `${2 * answerWidth}px`;
-      textBox.style.maxWidth = `${maxWidth * 0.7}px`;
+      if (answer[count] === correctAnswer[count]) {
+        textBox.style.display = 'none';
+      } else {
+        const answerWidth = answerBox.offsetWidth;
+        textBox.value = answer[count];
+        textBox.disabled = true;
+        textBox.style.width = `${2 * answerWidth}px`;
+        textBox.style.maxWidth = `${maxWidth * 0.7}px`;
+        answerBox.style.display = 'none';
+      }
+
+      count += 1;
     });
-    setCorrectAnswer(() => tmp);
     setLoading('visible');
   }, []);
 
@@ -82,4 +77,4 @@ const HtmlToTest = ({txt}) => {
   );
 };
 
-export default HtmlToTest;
+export default Grading;
