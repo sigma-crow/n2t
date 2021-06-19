@@ -10,6 +10,10 @@ import Container from '@material-ui/core/Container';
 import styled from 'styled-components';
 import {FcGoogle} from 'react-icons/fc';
 import ModalDialog from '@components/signup/ModalDialog';
+import {Login, googleLogin} from '@api';
+import {useInput} from '@hooks/useInput';
+import storageHandler from '@utils/localStorage';
+import {useHistory} from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -36,7 +40,7 @@ const Wrapper = styled.div`
   box-sizing: border-box;
   justify-content: center;
 `;
-const TextWrapper = styled.div`
+const TextWrapper = styled.a`
   display: flex;
   margin-left: 25px;
 `;
@@ -64,6 +68,19 @@ const GLabel = styled.button`
 const LogIn = () => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
+  const [id, setId] = useInput('');
+  const [pass, setPass] = useInput('');
+  const history = useHistory();
+  const clickLogin = () => {
+    Login({id, pass}).then((data) => {
+      storageHandler.set(data.token);
+      history.push('/');
+    });
+  };
+
+  const googleLoginBtn = () => {
+    googleLogin();
+  };
 
   const handleOpen = () => {
     setOpen(true);
@@ -82,6 +99,7 @@ const LogIn = () => {
             required
             fullWidth
             label='ID'
+            onChange={setId}
           />
           <TextField
             variant='outlined'
@@ -90,6 +108,7 @@ const LogIn = () => {
             fullWidth
             type='password'
             label='Password'
+            onChange={setPass}
           />
           <Grid container>
             <Grid item xs>
@@ -110,14 +129,18 @@ const LogIn = () => {
             </Grid>
           </Grid>
           <Wrapper>
-            <Button variant='contained' className={classes.submit}>
+            <Button
+              variant='contained'
+              onClick={clickLogin}
+              className={classes.submit}
+            >
               Log In
             </Button>
           </Wrapper>
           <Wrapper>
             <GLabel>
               <FcGoogle size='20' />
-              <TextWrapper>Google 로그인</TextWrapper>
+              <TextWrapper href='api/auth/google'>Google 로그인</TextWrapper>
             </GLabel>
           </Wrapper>
         </form>

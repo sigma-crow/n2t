@@ -11,11 +11,11 @@ const Wrapper = styled.div`
   flex-direction: column;
 `;
 
-const Editor = () => {
+const Editor = ({props}) => {
   return (
     <Wrapper>
       <Toolbar />
-      <Textarea />
+      <Textarea props={props} />
     </Wrapper>
   );
 };

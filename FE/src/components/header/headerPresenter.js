@@ -2,6 +2,7 @@ import React from 'react';
 import {useHistory} from 'react-router-dom';
 import styled from 'styled-components';
 import tempLog from '@static/logo.png';
+import storageHandler from '@utils/localStorage';
 import HeaderBtn from './HeaderBtn';
 
 const Wrapper = styled.div`
@@ -32,13 +33,28 @@ const BtnWrapper = styled.div`
 
 const HeaderPresenter = () => {
   const history = useHistory();
+  const user = storageHandler.get();
+  const logout = () => {
+    storageHandler.clear();
+    window.location.reload();
+  };
   return (
     <>
       <Wrapper>
         <LogBox onClick={() => history.push('/')} />
         <BtnWrapper>
-          <HeaderBtn text='Tutorial' />
-          <HeaderBtn text='Login' />
+          {user ? (
+            <>
+              <HeaderBtn text='Tutorial' />
+              <HeaderBtn text='MyNote' />
+              <HeaderBtn text='Logout' onClick={logout} />
+            </>
+          ) : (
+            <>
+              <HeaderBtn text='Tutorial' />
+              <HeaderBtn text='Login' />
+            </>
+          )}
         </BtnWrapper>
       </Wrapper>
     </>

@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import MyFolder from './myfolder';
-import FolderBtn from './folderBtn';
 import Account from './account';
 
 const ListWrapper = styled.div`
@@ -34,7 +33,6 @@ const SidebarPresenter = () => {
         <Account />
       </Wrapper>
       <ContentWrapper>
-        <FolderBtn />
         <MyFolder />
       </ContentWrapper>
     </ListWrapper>

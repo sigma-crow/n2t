@@ -1,27 +1,28 @@
-const dotenv = require("dotenv").config();
+const dotenv = require('dotenv').config();
 
 module.exports = {
   development: {
     username: process.env.DBUSER,
     password: process.env.DBPASS,
-    database: "N2T",
+    database: 'N2T',
+    logging: false,
     host: process.env.DBHOST,
     port: process.env.DBPORT,
-    dialect: "mysql",
+    dialect: 'mysql',
   },
   test: {
     username: global,
     password: null,
-    database: "database_test",
-    host: "127.0.0.1",
-    dialect: "mysql",
+    database: 'database_test',
+    host: '127.0.0.1',
+    dialect: 'mysql',
   },
   production: {
     username: process.env.DBUSER,
     password: process.env.DBPASS,
-    database: "N2T",
+    database: 'N2T',
     host: process.env.DBHOST,
     port: process.env.DBPORT,
-    dialect: "mysql",
+    dialect: 'mysql',
   },
 };

@@ -83,7 +83,7 @@ const Note = ({children}) => {
         {children}
         <Crud onClick={toggling}>
           <span>
-            <FaEllipsisV></FaEllipsisV>
+            <FaEllipsisV />
           </span>
         </Crud>
       </Wrapper>

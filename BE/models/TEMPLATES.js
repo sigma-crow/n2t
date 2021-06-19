@@ -1,12 +1,12 @@
-const { Model } = require("sequelize");
+const { Model } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
   class TEMPLATES extends Model {
     static associate(models) {
       this.hasMany(models.notes, {
-        foreignKey: "template",
-        sourceKey: "template_idx",
-        as: "noteTemplate",
+        foreignKey: 'template',
+        sourceKey: 'template_idx',
+        as: 'noteTemplate',
       });
     }
   }
@@ -30,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: "templates",
+      modelName: 'templates',
       timestamps: false,
     }
   );
