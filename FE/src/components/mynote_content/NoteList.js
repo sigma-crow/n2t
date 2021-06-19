@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState, useRef} from 'react';
 import {FaChevronDown} from 'react-icons/fa';
 import styled from 'styled-components';
 import DropdownMenu from './dropdown_Menu';
@@ -97,6 +97,20 @@ const NoteList = () => {
     setNotes([note, ...notes]);
     note.title;
   };
+  const myRef = useRef();
+
+  useEffect(() => {
+    const handelClickOutside = (e) => {
+      if (isOpen && !myRef.current.contains(e.target)) {
+        toggling();
+      }
+    };
+
+    document.addEventListener('mousedown', handelClickOutside);
+    return () => {
+      document.addEventListener('mousedown', handelClickOutside);
+    };
+  }, [myRef, isOpen]);
 
   const notesToList = notes.map((item, index) => (
     // <Wrapper key={index}>
@@ -112,7 +126,7 @@ const NoteList = () => {
         <Nav>
           <Dropbtn>
             <NewNoteBtn addNote={addNote} />
-            <DropDownContainer onClick={toggling}>
+            <DropDownContainer onClick={toggling} ref={myRef}>
               <span>
                 <FaChevronDown />
               </span>
