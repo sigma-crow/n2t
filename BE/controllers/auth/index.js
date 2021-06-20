@@ -1,5 +1,6 @@
 const authService = require('@services/auth');
 const userService = require('@services/user');
+const folderService = require('@services/folder');
 const { getEncryptedPassword } = require('@utils/bcrypt');
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
@@ -14,7 +15,6 @@ const authController = {
   },
   async login(req, res) {
     passport.authenticate('local', { session: false }, (err, user) => {
-      // console.log(user);
       if (err || !user) {
         return res.status(400).json({
           result: false,
@@ -68,9 +68,23 @@ const authController = {
       res.status(500).json(response);
       return;
     }
+
+    const result = await folderService.createRoot({ userIdx });
+    if (!result) {
+      response.result = false;
+      response.message = 'Sign up Fail';
+      res.status(500).json(response);
+      return;
+    }
+    // 여기서 root 폴더 만들기
+
     response.result = true;
     response.message = 'Sign up Success';
     res.json(response);
+  },
+
+  async islogin(req, res) {
+    res.status(200).json({ result: true });
   },
 };
 
