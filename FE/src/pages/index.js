@@ -8,3 +8,4 @@ export {default as TutorialPage} from '@pages/tutorialPage';
 export {default as MyNotePage} from '@pages/myNotePage';
 export {default as FindIdPage} from '@pages/findIdPage';
 export {default as LogInPage} from '@pages/logInPage';
+export {default as ViewPage} from '@pages/viewerPage';
