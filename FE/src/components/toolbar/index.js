@@ -2,9 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import ToolBtn from '@/components/toolbar/toolBtn';
 import {FaCircle} from 'react-icons/fa';
-import {AiOutlineUnderline} from 'react-icons/ai';
-import {AiOutlineHighlight} from 'react-icons/ai';
-import {AiOutlineBold} from 'react-icons/ai';
+import {
+  AiOutlineUnderline,
+  AiOutlineHighlight,
+  AiOutlineBold,
+} from 'react-icons/ai';
 
 const Wrapper = styled.div`
   margin: auto 0;
@@ -33,34 +35,46 @@ const TextBtnWrapper = styled.div`
   float: right;
 `;
 
-const Toolbar = () => {
-  const onClick = () => {
-    console.log('click!');
+const Toolbar = ({props}) => {
+  const {onSave, goTest} = props;
+  const onBold = () => {
+    console.log('bold');
   };
-
+  const onHighlight = () => {
+    console.log('highlight');
+  };
+  const onUnderline = () => {
+    console.log('underline');
+  };
+  const onRed = () => {
+    console.log('red');
+  };
+  const onBlue = () => {
+    console.log('blue');
+  };
   return (
     <Wrapper>
-      <ToolBtn onClick={onClick}>
+      <ToolBtn onClick={onBold}>
         <AiOutlineBold size='20px' style={{padding: '5px 7px'}} />
       </ToolBtn>
-      <ToolBtn onClick={onClick}>
+      <ToolBtn onClick={onHighlight}>
         <AiOutlineHighlight size='20px' style={{padding: '5px 7px'}} />
       </ToolBtn>
-      <ToolBtn onClick={onClick}>
+      <ToolBtn onClick={onUnderline}>
         <AiOutlineUnderline size='20px' style={{padding: '5px 7px'}} />
       </ToolBtn>
-      <ToolBtn onClick={onClick}>
+      <ToolBtn onClick={onRed}>
         <FaCircle size='20px' color='red' style={{padding: '5px 7px'}} />
       </ToolBtn>
-      <ToolBtn onClick={onClick}>
+      <ToolBtn onClick={onBlue}>
         <FaCircle size='20px' color='blue' style={{padding: '5px 7px'}} />
       </ToolBtn>
 
       <RightSection>
-        <ToolBtn onClick={onClick}>
+        <ToolBtn onClick={onSave}>
           <TextBtnWrapper>SAVE</TextBtnWrapper>
         </ToolBtn>
-        <ToolBtn onClick={onClick}>
+        <ToolBtn onClick={goTest}>
           <TextBtnWrapper>TEST</TextBtnWrapper>
         </ToolBtn>
       </RightSection>

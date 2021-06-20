@@ -1,6 +1,5 @@
-import React, {useContext, useEffect, useState} from 'react';
-import {useHistory} from 'react-router-dom';
-import {SubmitContext} from '@hooks/SubmitAnswer';
+import React, {useEffect, useState} from 'react';
+import {useHistory, useLocation} from 'react-router-dom';
 import MarkdownIt from 'markdown-it';
 import styled from 'styled-components';
 import custom from '../custom_rule/index';
@@ -11,8 +10,14 @@ const Wrapper = styled.form``;
 
 let md = new MarkdownIt();
 md = custom(md);
-const Grading = ({txt}) => {
+const Grading = () => {
   const history = useHistory();
+  const location = useLocation();
+  if (!location.state) {
+    window.location.replace('/');
+  }
+  const {correctAnswer, answer, inputText} = location.state;
+
   const tmp = `
     <style type = "text/css">
       #test{
@@ -34,8 +39,6 @@ const Grading = ({txt}) => {
   const wrapStyle = {
     visibility: loading,
   };
-
-  const {answer, correctAnswer} = useContext(SubmitContext);
 
   useEffect(() => {
     if (correctAnswer.length === 0) {
@@ -65,7 +68,7 @@ const Grading = ({txt}) => {
     setLoading('visible');
   }, []);
 
-  const result = md.render(txt);
+  const result = md.render(inputText);
   return (
     <Wrapper id='answerForm'>
       <div

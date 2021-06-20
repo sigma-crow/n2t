@@ -12,13 +12,13 @@ const Container = styled.div`
 const HeaderWrapper = styled.div`
   height: 80px;
 `;
-const EditorPage = () => {
+const EditorPage = ({match}) => {
   return (
     <Container>
       <HeaderWrapper>
         <Header />
       </HeaderWrapper>
-      <EditorLayout />
+      <EditorLayout props={{match}} />
     </Container>
   );
 };

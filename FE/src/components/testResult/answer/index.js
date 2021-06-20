@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import * as Render from '@components/Markdown-it/render/index';
+import {useLocation} from 'react-router-dom';
+import testString from '@utils/testString';
 
 const Wrapper = styled.div`
   height: 100%;
@@ -38,28 +40,17 @@ const AnswerWrapper = styled.div`
 `;
 
 const Answer = () => {
+  const location = useLocation();
+  console.log(location.state);
+  let inputText = testString;
+  if (location.state) {
+    inputText = location.state.inputText;
+  }
   return (
     <Wrapper>
-      <Title>N2T 노트에 대한 답안</Title>
+      <Title>노트에 대한 답안</Title>
       <AnswerWrapper>
-        <Render.StrToHtml
-          txt='
-          # N2T
-
-          ## 정리에서 @b문제@b를 내면??
-          
-          1. N2T는 @h@bNote to Test@b@h 의 줄임말이다.
-          
-          2. N2T는 @bLimit Sigma Crow@b 팀에서 제작 중이다.
-          
-          ## custom Tag
-
-          - @ + u  -> @u밑줄@u 
-          - @ + h  -> @h하이라이트@h
-          - @ + b  -> @b색 변경(파랑 등 설정 가능)@b
-          
-        '
-        />
+        <Render.StrToHtml inputText={inputText} />
       </AnswerWrapper>
     </Wrapper>
   );

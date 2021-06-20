@@ -7,11 +7,14 @@ const Wrapper = styled.form``;
 
 let md = new MarkdownIt();
 md = custom(md);
-const StrToHtml = ({inputText}) => {
+const StrToHtml = ({inputText, txt}) => {
   const [result, setResult] = useState('');
-
   useEffect(() => {
-    setResult(md.render(inputText));
+    if (inputText) {
+      setResult(md.render(inputText));
+    } else {
+      setResult(md.render(txt || ' '));
+    }
   }, [inputText]);
   return (
     <Wrapper>

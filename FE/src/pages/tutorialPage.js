@@ -12,6 +12,7 @@ const useStyles = makeStyles(() => ({
     backgroundColor: '#FFFAF6',
     padding: 0,
     marginBottom: '50px',
+    maxWidth: '100%',
   },
 }));
 
@@ -24,7 +25,7 @@ const TutorialPage = ({history}) => {
 
   return (
     <>
-      <Container className={classes.rootContainer} maxWidth='xl'>
+      <Container className={classes.rootContainer}>
         <HeaderWrapper>
           <Header />
         </HeaderWrapper>

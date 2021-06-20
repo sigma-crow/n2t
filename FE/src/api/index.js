@@ -23,6 +23,7 @@ export const singUp = async (params) => {
 export const googleLogin = async () => {
   await axios.get('/api/auth/google');
 };
+
 export const createNote = async (params) => {
   const {data} = await axios.post('/api/note/create', params);
   return data;
@@ -30,5 +31,30 @@ export const createNote = async (params) => {
 
 export const getNote = async () => {
   const {data} = await axios.get('/api/note/getnote');
+  return data;
+};
+
+export const getPublicNotes = async (params) => {
+  const {data} = await axios.get(`/api/search/?query=${params.query}`);
+  return data;
+};
+
+export const getPublicNote = async (params) => {
+  const {data} = await axios.get(`/api/search/note?idx=${params.idx}`);
+  return data;
+};
+
+export const getNoteById = async (idx) => {
+  const {data} = await axios.get(`/api/note/getnoteby/${idx}`);
+  return data;
+};
+
+export const updateNote = async (params) => {
+  const {data} = await axios.patch('/api/note/update', params);
+  return data;
+};
+
+export const isLogin = async () => {
+  const {data} = await axios.get('/api/auth/islogin');
   return data;
 };

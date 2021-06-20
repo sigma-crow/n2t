@@ -1,7 +1,9 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
 import SearchBtn from '@/components/searchShared/searchBtn';
 import ClearBtn from '@/components/searchShared/clearBtn';
+import {getPublicNotes} from '@api';
+import {useHistory} from 'react-router-dom';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -52,17 +54,33 @@ const Input = styled.input.attrs({
   }
 `;
 
-const SearchBar = () => {
-  const [searchField, setSearchField] = useState('');
+const SearchBar = ({props}) => {
+  const {init, isMain, setNotes} = props;
+  const [searchField, setSearchField] = useState(init);
+  const history = useHistory();
   const handleChange = (e) => {
     setSearchField(e.target.value);
   };
 
-  const onSearch = () => {};
-
   const onClear = () => {
     setSearchField('');
   };
+
+  const onSearch = () => {
+    if (isMain) {
+      history.push(`/searchShared?n=${searchField}`);
+    }
+    getPublicNotes({query: searchField}).then((data) => {
+      const {notes} = data;
+      setNotes([...notes]);
+    });
+  };
+
+  useEffect(() => {
+    if (!isMain) {
+      onSearch();
+    }
+  }, []);
 
   return (
     <Wrapper>

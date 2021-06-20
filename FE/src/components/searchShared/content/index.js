@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import SideBar from '@/components/searchShared/sideBar';
 import Scroll from '@/components/searchShared/scroll';
 import SearchResult from '@/components/searchShared/SearchResult';
-import notes from '@/data/notes';
+
 import category from '@/data/categories';
 
 const Wrapper = styled.div`
@@ -24,7 +24,8 @@ const ResultWrapper = styled.div`
   overflow: hidden;
 `;
 
-const Content = () => {
+const Content = ({props}) => {
+  const {notes} = props;
   return (
     <Wrapper>
       <SideBar categories={category} />
