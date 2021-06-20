@@ -2,6 +2,7 @@ import React from 'react';
 import * as Pages from '@pages/index';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import SubmitAnswer from '@hooks/SubmitAnswer';
+import UserInfo from '@hooks/userInfo';
 import storageHandler from '@utils/localStorage';
 import './App.css';
 // import StickyFooter from './components/comman/Footer';
@@ -13,9 +14,12 @@ const moveTokenCookieToLocalStorage = () => {
       .find((cookie) => cookie.includes('token='))
       .split('=')[1];
     deleteCookie('token');
-    storageHandler.set(token);
+    if (token) {
+      storageHandler.set(token);
+      window.location.replace('/');
+    }
   } catch (e) {
-    return undefined;
+    // return undefined;
   }
 };
 
@@ -31,18 +35,23 @@ function App() {
         <Switch>
           <Route exact path='/' component={Pages.HomePage} />
           <Route exact path='/tutorial' component={Pages.TutorialPage} />
-          <Route
-            exact
-            path='/searchShared'
-            component={Pages.searchSharedPage}
-          />
-          <Route exact path='/edit' component={Pages.EditorPage} />
-          <Route exact path='/note' component={Pages.MyNotePage} />
-          <Route exact path='/find' component={Pages.FindIdPage} />
-          <Route exact path='/login' component={Pages.LogInPage} />
           <SubmitAnswer>
-            <Route exact path='/test' component={Pages.TestPage} />
-            <Route exact path='/result' component={Pages.TestResultPage} />
+            <UserInfo>
+              <Route
+                exact
+                path='/searchShared/'
+                component={Pages.searchSharedPage}
+              />
+              <Route exact path='/viewer/:idx' component={Pages.ViewPage} />
+              <Route exact path='/find' component={Pages.FindIdPage} />
+              <Route exact path='/login' component={Pages.LogInPage} />
+
+              <Route exact path='/test' component={Pages.TestPage} />
+              <Route exact path='/result' component={Pages.TestResultPage} />
+
+              <Route exact path='/note' component={Pages.MyNotePage} />
+              <Route exact path='/edit/:idx' component={Pages.EditorPage} />
+            </UserInfo>
           </SubmitAnswer>
         </Switch>
       </BrowserRouter>
