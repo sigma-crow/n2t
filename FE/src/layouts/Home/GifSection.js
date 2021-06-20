@@ -3,11 +3,10 @@ import GifPlayer from 'react-gif-player';
 import {makeStyles} from '@material-ui/core/styles';
 
 import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Toolbar from '@material-ui/core/Toolbar';
-import {AppBar, Button, Container} from '@material-ui/core';
-import still from '../../../static/gif-still2.png';
+import {AppBar, Container} from '@material-ui/core';
+import gif from '../../../static/tutorial.gif';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -18,30 +17,16 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    maxWidth: 640,
-    minWidth: 300,
+    maxWidth: 800,
+    minWidth: 800,
     backgroundColor: theme.palette.grey[100],
     margin: '0px auto',
   },
-  content: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'flex-start',
-    height: '10%',
-  },
   appBar: {
     backgroundColor: '#82634c',
-    maxWidth: 640,
-    minWidth: 300,
+    maxWidth: 800,
+    minWidth: 800,
     margin: '0px auto',
-  },
-  media: {
-    margin: '15px 0px',
-    width: '80%',
-    height: '70%',
-  },
-  button: {
-    color: '#795548',
   },
 }));
 
@@ -59,17 +44,7 @@ const GifSection = () => {
           </Toolbar>
         </AppBar>
         <Card className={classes.root} elevation={5}>
-          <GifPlayer
-            still={still}
-            gif='https://post-phinf.pstatic.net/MjAxODEyMTFfMTAw/MDAxNTQ0NTA0MDgyOTMz.bD3_qYAKhivyntOXUfWOxIDab4msHT-KNMDDwq3oMnIg.4tDkeh83lxHseQFLoy4c9JAXtfdy3iyPzGlN_2JWLqYg.GIF/cat-typing-furiously.gif?type=w1200'
-          />
-          <CardContent className={classes.content}>
-            <Button className={classes.button}>
-              <Typography component='h5' variant='h5'>
-                영상 따라해보기
-              </Typography>
-            </Button>
-          </CardContent>
+          <GifPlayer gif={gif} />
         </Card>
       </Container>
     </>
