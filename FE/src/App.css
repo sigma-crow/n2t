@@ -7,6 +7,10 @@
   pointer-events: none;
 }
 
+#red {
+  color: red;
+}
+
 #blue {
   color: blue;
   /* display: none; */

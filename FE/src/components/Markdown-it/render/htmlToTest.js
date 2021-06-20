@@ -11,7 +11,7 @@ const Wrapper = styled.form``;
 
 let md = new MarkdownIt();
 md = custom(md);
-const HtmlToTest = ({txt}) => {
+const HtmlToTest = ({inputText}) => {
   const history = useHistory();
   const tmp = `
     <style type = "text/css">
@@ -29,13 +29,13 @@ const HtmlToTest = ({txt}) => {
   `;
 
   const [loading, setLoading] = useState('hidden');
+  const [answer, setAnswer] = useState([]);
+  const [correctAnswer, setCorrectAnswer] = useState([]);
   const wrapStyle = {
     visibility: loading,
   };
 
-  const {setAnswer, isClick, setClick, setCorrectAnswer} = useContext(
-    SubmitContext,
-  );
+  const {isClick, setClick} = useContext(SubmitContext);
 
   useEffect(() => {
     if (isClick) {
@@ -46,7 +46,10 @@ const HtmlToTest = ({txt}) => {
       });
       setAnswer(() => tmp);
       setClick(false);
-      history.push('/result');
+      history.push({
+        pathname: 'result',
+        state: {correctAnswer, answer: tmp, inputText},
+      });
     }
   }, [isClick]);
 
@@ -70,7 +73,7 @@ const HtmlToTest = ({txt}) => {
     setLoading('visible');
   }, []);
 
-  const result = md.render(txt);
+  const result = md.render(inputText);
   return (
     <Wrapper id='answerForm'>
       <div

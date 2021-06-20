@@ -21,6 +21,14 @@ const custom = (md) => {
     return `<test><input type='text' id='test'><span id='blue'>${tokens[idx].content}</span></test>`;
   };
 
+  md.inline.ruler.push('red', (state, silent) => {
+    return customFun(state, silent, '@r', 'red');
+  });
+
+  const redRender = (tokens, idx) => {
+    return `<test><input type='text' id='test'><span id='red'>${tokens[idx].content}</span></test>`;
+  };
+
   md.inline.ruler.after('emphasis', 'highlight', (state, silent) => {
     return customFun(state, silent, '@h', 'highlight');
   });
@@ -35,6 +43,7 @@ const custom = (md) => {
 
   md.renderer.rules.underLine = underLineRender;
   md.renderer.rules.blue = blueRender;
+  md.renderer.rules.red = redRender;
   md.renderer.rules.highlight = highlightRender;
 
   return md;
