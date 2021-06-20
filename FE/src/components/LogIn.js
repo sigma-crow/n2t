@@ -74,12 +74,8 @@ const LogIn = () => {
   const clickLogin = () => {
     Login({id, pass}).then((data) => {
       storageHandler.set(data.token);
-      history.push('/');
+      window.location.replace('/');
     });
-  };
-
-  const googleLoginBtn = () => {
-    googleLogin();
   };
 
   const handleOpen = () => {
