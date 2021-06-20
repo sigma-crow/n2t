@@ -1,9 +1,9 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
 import Footer from '@/components/comman/Footer';
 import SectionOne from '@/layouts/Home/SectionOne';
 import GifSection from '@/layouts/Home/GifSection';
-import notes from '@/data/notes';
+import {getPublicNotes} from '@/api';
 
 import SearchSection from '@/layouts/Home/SearchSection';
 
@@ -15,15 +15,24 @@ const Container = styled.div`
   flex-direction: column;
 `;
 
-const HomePresenter = () => (
-  <>
-    <Container>
-      <SectionOne />
-      <SearchSection filteredNotes={notes} />
-      <GifSection />
-    </Container>
-    <Footer />
-  </>
-);
+const HomePresenter = () => {
+  const [notes, setNotes] = useState([]);
+  useEffect(() => {
+    getPublicNotes({query: ''}).then((data) => {
+      const {notes} = data;
+      setNotes([...notes]);
+    });
+  }, []);
+  return (
+    <>
+      <Container>
+        <SectionOne />
+        <SearchSection filteredNotes={notes} />
+        <GifSection />
+      </Container>
+      <Footer />
+    </>
+  );
+};
 
 export default HomePresenter;

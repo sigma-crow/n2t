@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
 import SearchBar from '@/components/searchShared/searchBar';
 import Note from '@/components/searchShared/note';
+import {useHistory} from 'react-router-dom';
 
 const Wrapper = styled.div`
   margin: 150px auto;
@@ -56,16 +57,17 @@ const Line = styled.div`
 `;
 
 const SearchSection = ({filteredNotes}) => {
+  const history = useHistory();
   const filtered = filteredNotes.map((note) => (
-    <Note key={note.id} note={note} />
+    <Note key={note.note_idx} note={note} />
   ));
 
   const onViewMore = () => {
-    console.log(true);
+    history.push('/searchShared');
   };
   return (
     <Wrapper>
-      <SearchBar />
+      <SearchBar props={{init: '', isMain: true}} />
       <Line />
       <Result>{filtered}</Result>
       <Line />
