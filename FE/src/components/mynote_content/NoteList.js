@@ -1,8 +1,7 @@
-import React, {useEffect, useState, useRef, useContext} from 'react';
+import React, {useEffect, useState, useRef} from 'react';
 import {FaChevronDown} from 'react-icons/fa';
 import styled from 'styled-components';
 import {getNote} from '@/api';
-import NoteContext from '@hooks/noteList';
 import DropdownMenu from './dropdown_Menu';
 import NewNoteBtn from './newnote_btn';
 import Note from './note';
