@@ -7,15 +7,6 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'user_idx',
         targetKey: 'user_idx',
       });
-
-      this.belongsTo(models.folders, {
-        foreignKey: 'parent_folder_idx',
-        targetKey: 'folder_idx',
-      });
-      this.hasMany(models.folders, {
-        foreignKey: 'parent_folder_idx',
-        sourceKey: 'folder_idx',
-      });
     }
   }
   FOLDERS.init(
@@ -45,7 +36,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       parent_folder_idx: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
       },
     },
     {
