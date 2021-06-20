@@ -33,13 +33,17 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
+      note_name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
       note_context: {
         type: DataTypes.BLOB,
         allowNull: true,
       },
       category: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
       },
       is_public: {
         type: DataTypes.BOOLEAN,
@@ -47,7 +51,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       template: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
       },
       path: {
         type: DataTypes.STRING,

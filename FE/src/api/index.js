@@ -24,6 +24,16 @@ export const googleLogin = async () => {
   await axios.get('/api/auth/google');
 };
 
+export const createNote = async (params) => {
+  const {data} = await axios.post('/api/note/create', params);
+  return data;
+};
+
+export const getNote = async () => {
+  const {data} = await axios.get('/api/note/getnote');
+  return data;
+};
+
 export const getPublicNotes = async (params) => {
   const {data} = await axios.get(`/api/search/?query=${params.query}`);
   return data;

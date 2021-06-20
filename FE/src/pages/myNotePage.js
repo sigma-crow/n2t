@@ -1,8 +1,13 @@
 import styled from 'styled-components';
-import React from 'react';
+import React, {useContext, useEffect} from 'react';
 import Mynote from '@components/mynote_content';
 import Sidebar from '@components/sidebar';
 import Header from '@components/header';
+import storageHandler from '@utils/localStorage';
+import parseJwt from '@utils/parserJwt';
+import {UserInfoContext} from '@hooks/userInfo';
+import {isLogin} from '@/api';
+import {useHistory} from 'react-router-dom';
 
 const Container = styled.div`
   display: flex;
@@ -20,7 +25,21 @@ const Wrapper = styled.div`
   background: #fffaf6;
   flex: 4;
 `;
+
 const MynotePage = () => {
+  const history = useHistory();
+  const {user, setUser} = useContext(UserInfoContext);
+  useEffect(() => {
+    const token = storageHandler.get();
+    const {name, user_idx: userIdx, email} = parseJwt(token);
+    setUser({
+      ...user,
+      name,
+      userIdx,
+      email,
+    });
+  }, []);
+
   return (
     <>
       <HeaderWrapper>

@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import {FaEllipsisV} from 'react-icons/fa';
+import {useHistory} from 'react-router-dom';
 
 const Container = styled.div`
   width: 230px;
@@ -73,14 +74,31 @@ const MenuWrapper = styled.div`
     background: #c7c4bb;
   }
 `;
-const Note = ({children}) => {
+const Title = styled.div`
+  font-size: ${({theme}) => theme.fontSize.xs};
+  font-weight: ${({theme}) => theme.fontWeight.bold};
+  color: black;
+  width: 190px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-left: 40px;
+  padding-top: 25px;
+`;
+const Note = ({props}) => {
+  const history = useHistory();
+  const {item} = props;
   const toggling = () => setIsOpen(!isOpen);
   const [isOpen, setIsOpen] = React.useState(false);
 
+  const onEdit = () => {
+    history.push(`/edit/${item.note_idx}`);
+  };
+
   return (
     <Container>
-      <Wrapper>
-        {children}
+      <Wrapper onClick={onEdit}>
+        <Title>{item.note_name}</Title>
         <Crud onClick={toggling}>
           <span>
             <FaEllipsisV />
