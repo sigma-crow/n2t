@@ -38,6 +38,18 @@ const HeaderPresenter = () => {
     storageHandler.clear();
     window.location.reload();
   };
+  const tutorialBtn = () => {
+    history.push('/tutorial');
+  };
+  const noteBtn = () => {
+    history.push('/note');
+  };
+  const login = () => {
+    history.push('/login');
+  };
+  const searchBtn = () => {
+    history.push('/searchShared');
+  };
   return (
     <>
       <Wrapper>
@@ -45,14 +57,15 @@ const HeaderPresenter = () => {
         <BtnWrapper>
           {user ? (
             <>
-              <HeaderBtn text='Tutorial' />
-              <HeaderBtn text='MyNote' />
+              <HeaderBtn text='Search' onClick={searchBtn} />
+              <HeaderBtn text='Tutorial' onClick={tutorialBtn} />
+              <HeaderBtn text='MyNote' onClick={noteBtn} />
               <HeaderBtn text='Logout' onClick={logout} />
             </>
           ) : (
             <>
-              <HeaderBtn text='Tutorial' />
-              <HeaderBtn text='Login' />
+              <HeaderBtn text='Tutorial' onClick={tutorialBtn} />
+              <HeaderBtn text='Login' onClick={login} />
             </>
           )}
         </BtnWrapper>
