@@ -5,6 +5,8 @@ import ResultBtn from '@components/resultBtn';
 import {makeStyles} from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import * as Rander from '@components/Markdown-it/render/index';
+import {useHistory, useLocation} from 'react-router-dom';
+import testString from '@utils/testString';
 
 const Container = styled.div`
   display: flex;
@@ -50,10 +52,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const TestPage = ({history}) => {
-  // Props 받기
+const TestPage = () => {
+  const history = useHistory();
+  const location = useLocation();
   const classes = useStyles();
-  // const history = useHistory();
+  let inputText = testString;
+  if (location.state) {
+    inputText = location.state.inputText;
+  }
+
   useEffect(() => {
     const unblock = history.block(() => {
       return window.confirm('정말이동하시겠습니까?');
@@ -75,25 +82,7 @@ const TestPage = ({history}) => {
           <ResultBtn />
         </TitleWrapper>
         <HtmlWrapper id='boundary'>
-          <Rander.HtmlToTest
-            // 여기서 값을 바꾸고
-            txt='
-          # N2T
-          
-          ## 정리에서 @b문제@b를 내면??
-          
-          1. N2T는 @h@bNote to Test@b@h 의 줄임말이다.
-          
-          2. N2T는 @bLimit Sigma Crow@b 팀에서 제작 중이다.
-          
-          ## custom Tag
-
-          - @ + u  -> @u밑줄@u 
-          - @ + h  -> @h하이라이트@h
-          - @ + b  -> @b색 변경(파랑 등 설정 가능)@b
-          
-        '
-          />
+          <Rander.HtmlToTest inputText={inputText} />
         </HtmlWrapper>
       </TestWrapper>
     </Container>
