@@ -16,7 +16,7 @@ Axios.interceptors.response.use(
       alert(`${error.response?.data?.message || error.message}`);
     if (error.response.status === 401) {
       storageHandler.clear();
-      window.location.reload();
+      window.location.replace('/');
     }
     return Promise.reject(error);
   },
