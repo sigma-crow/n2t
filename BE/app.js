@@ -7,6 +7,7 @@ const logger = require('morgan');
 const passportConfig = require('@/config/passport.config');
 
 const authRouter = require('@routes/auth');
+const noteRouter = require('@routes/note');
 const indexRouter = require('@routes/index');
 const usersRouter = require('@routes/users');
 const { sequelize } = require('@models/index');
@@ -29,6 +30,7 @@ app.use(passportConfig.initialize());
 const jwtAuthenticate = passportConfig.authenticate('jwt', { session: false });
 
 app.use('/api/auth', authRouter);
+app.use('/api/note', jwtAuthenticate, noteRouter);
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
