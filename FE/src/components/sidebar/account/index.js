@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import styled from 'styled-components';
+import {UserInfoContext} from '@hooks/userInfo';
 import {FaCircle} from 'react-icons/fa';
 
 const Wrapper = styled.div`
@@ -23,12 +24,13 @@ const Wrapper = styled.div`
 `;
 
 const Account = () => {
+  const {user} = useContext(UserInfoContext);
   return (
     <Wrapper>
       <span>
         <FaCircle />
       </span>
-      유현진
+      {user.name}
     </Wrapper>
   );
 };
