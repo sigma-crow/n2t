@@ -23,3 +23,8 @@ export const singUp = async (params) => {
 export const googleLogin = async () => {
   await axios.get('/api/auth/google');
 };
+
+export const isLogin = async () => {
+  const {data} = await axios.get('/api/auth/islogin');
+  return data;
+};
