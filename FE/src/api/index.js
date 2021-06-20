@@ -23,3 +23,12 @@ export const singUp = async (params) => {
 export const googleLogin = async () => {
   await axios.get('/api/auth/google');
 };
+export const getPublicNotes = async (params) => {
+  const {data} = await axios.get(`/api/search/?query=${params.query}`);
+  return data;
+};
+
+export const getPublicNote = async (params) => {
+  const {data} = await axios.get(`/api/search/note?idx=${params.idx}`);
+  return data;
+};

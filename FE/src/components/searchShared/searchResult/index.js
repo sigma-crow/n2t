@@ -17,7 +17,7 @@ const Wrapper = styled.div`
 
 const SearchResult = ({filteredNotes}) => {
   const filtered = filteredNotes.map((note) => (
-    <Note key={note.id} note={note} />
+    <Note key={note.note_idx} note={note} />
   ));
   return <Wrapper>{filtered}</Wrapper>;
 };

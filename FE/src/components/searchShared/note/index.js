@@ -1,4 +1,5 @@
 import React from 'react';
+import {useHistory} from 'react-router-dom';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
@@ -38,10 +39,14 @@ const Writer = styled.div`
 `;
 
 const Note = ({note}) => {
+  const history = useHistory();
+  const viewBtn = () => {
+    history.push(`/viewer/${note.note_idx}`);
+  };
   return (
-    <Wrapper>
-      <Title>{note.title}</Title>
-      <Writer>{note.writer}</Writer>
+    <Wrapper onClick={viewBtn}>
+      <Title>{note.note_name}</Title>
+      <Writer>{note.user.name}</Writer>
     </Wrapper>
   );
 };
