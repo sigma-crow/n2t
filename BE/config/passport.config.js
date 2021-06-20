@@ -9,7 +9,7 @@ const JWTStrategy = passportJWT.Strategy;
 const ExtractJWT = passportJWT.ExtractJwt;
 require('dotenv').config();
 
-const { auths, users } = require('../models/index');
+const { auths, users, folders } = require('../models/index');
 
 passport.use(
   new GoogleStrategy(
@@ -20,15 +20,27 @@ passport.use(
     },
     (accessToken, refreshToken, profile, cb) => {
       const { id, displayName, emails } = profile;
-      return auths.findOne({ email: emails[0].value }).then((user) => {
+      return auths.findOne({ where: { id } }).then((user) => {
         if (user) {
-          return cb(null, user);
-        }
-        users.create({ name: displayName, email: emails[0].value, oauth: 'Google' }).then((user) => {
-          auths.create({ id, password: '', user_idx: user.user_idx }).then((auth) => {
-            return cb(null, auth);
+          users.findOne({ where: { user_idx: user.user_idx } }).then((userData) => {
+            return cb(null, userData);
           });
-        });
+        } else {
+          users.create({ name: displayName, email: emails[0].value, oauth: 'Google' }).then((user) => {
+            auths.create({ id, password: '', user_idx: user.user_idx }).then((auth) => {
+              const query = {
+                name: 'root',
+                is_root: true,
+                path: '/',
+                parent_folder_idx: -1,
+                user_idx: user.user_idx,
+              };
+              folders.create(query).then(() => {
+                return cb(null, user);
+              });
+            });
+          });
+        }
       });
     }
   )
@@ -41,10 +53,10 @@ passport.use(
       secretOrKey: process.env.JWT_SECRET,
     },
     async (jwtPayload, done) => {
-      return auths
-        .findByPk(jwtPayload.auth_idx)
-        .then((auth) => {
-          return done(null, auth);
+      return users
+        .findByPk(jwtPayload.user_idx)
+        .then((user) => {
+          return done(null, user);
         })
         .catch((err) => {
           return done(err);
@@ -64,12 +76,12 @@ passport.use(
         .findOne({ where: { id } })
         .then((user) => {
           const result = bcrypt.compareSync(password, user.password);
-          user.password = '';
           if (!user || !result) {
             return done(null, false, { message: 'Incorrect' });
           }
-
-          return done(null, user, { message: 'Logged In Successfully' });
+          users.findOne({ where: { user_idx: user.user_idx } }).then((userData) => {
+            return done(null, userData, { message: 'Logged In Successfully' });
+          });
         })
         .catch((err) => done(err));
     }
