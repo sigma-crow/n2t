@@ -36,14 +36,15 @@ const TextArea = styled.textarea`
 
 const Textarea = ({props}) => {
   // const [inputText, setInputText] = useState('');
-  const {inputText, setInputText} = props;
+  const {inputText, setInputText, onSave} = props;
   const [lineStr, setLineStr] = useState([]);
 
   useEffect(() => {
+    if (!inputText) return;
     const lines = inputText.split('\n');
     const tmpArray = [];
     for (let i = 0; i < lines.length; i += 1) {
-      tmpArray.push(<div>{i + 1}</div>);
+      tmpArray.push(<div key={i + 1}>{i + 1}</div>);
     }
     setLineStr(tmpArray);
   }, [inputText]);
@@ -53,9 +54,9 @@ const Textarea = ({props}) => {
   };
 
   const onKeySave = (e) => {
-    e.preventDefault();
     if (e.ctrlKey === true && e.keyCode === 83) {
-      console.log('자동저장');
+      e.preventDefault();
+      onSave();
     }
   };
 

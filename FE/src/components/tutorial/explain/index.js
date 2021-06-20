@@ -4,9 +4,10 @@ import Paper from '@material-ui/core/Paper';
 import Card from '@material-ui/core/Card';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import {CardContent, CardHeader, makeStyles} from '@material-ui/core';
+import {makeStyles} from '@material-ui/core';
+import {useHistory} from 'react-router-dom';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   explainContainer: {
     display: 'flex',
     flexDirection: 'column',
@@ -54,8 +55,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ExplainContainer = ({history}) => {
+const ExplainContainer = () => {
   const classes = useStyles();
+  const history = useHistory();
 
   return (
     <Container className={classes.explainContainer}>
