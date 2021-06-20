@@ -1,6 +1,8 @@
-import React, {useEffect, useState, useRef} from 'react';
+import React, {useEffect, useState, useRef, useContext} from 'react';
 import {FaChevronDown} from 'react-icons/fa';
 import styled from 'styled-components';
+import {getNote} from '@/api';
+import NoteContext from '@hooks/noteList';
 import DropdownMenu from './dropdown_Menu';
 import NewNoteBtn from './newnote_btn';
 import Note from './note';
@@ -76,28 +78,27 @@ const DropDownContainer = styled.div`
 }
   }
 `;
-const Title = styled.div`
-  font-size: ${({theme}) => theme.fontSize.xs};
-  font-weight: ${({theme}) => theme.fontWeight.bold};
-  color: black;
-  width: 190px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  padding-left: 40px;
-  padding-top: 25px;
-`;
+
 const NoteList = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isPublic, setPublic] = useState(true);
+  const [notes, setNotes] = useState([]);
+  const [isSend, setSend] = useState(false);
+  const myRef = useRef();
   const toggling = () => setIsOpen(!isOpen);
 
-  const [notes, setNotes] = React.useState([]);
+  useEffect(() => {
+    getNote().then((data) => {
+      const {notes: notelist} = data;
+      setNotes([...notelist]);
+    });
+    setSend(false);
+  }, [isSend]);
 
-  const addNote = (note) => {
-    setNotes([note, ...notes]);
-    note.title;
-  };
-  const myRef = useRef();
+  // const addNote = (note) => {
+  //   setNotes([note, ...notes]);
+  //   note.title;
+  // };
 
   useEffect(() => {
     const handelClickOutside = (e) => {
@@ -112,27 +113,22 @@ const NoteList = () => {
     };
   }, [myRef, isOpen]);
 
-  const notesToList = notes.map((item, index) => (
-    // <Wrapper key={index}>
-    //   <Title>{item.title}</Title>
-    // </Wrapper>
-    <Note key={index}>
-      <Title>{item.title}</Title>
-    </Note>
+  const notesToList = notes.map((item) => (
+    <Note key={item.note_idx} props={{item}} />
   ));
   return (
     <Container>
       <ButtonWrapper>
-        <Nav>
+        <Nav ref={myRef}>
           <Dropbtn>
-            <NewNoteBtn addNote={addNote} />
-            <DropDownContainer onClick={toggling} ref={myRef}>
+            <NewNoteBtn isPublic={isPublic} isSend={isSend} setSend={setSend} />
+            <DropDownContainer onClick={toggling}>
               <span>
                 <FaChevronDown />
               </span>
             </DropDownContainer>
           </Dropbtn>
-          {isOpen && <DropdownMenu addNote={addNote} />}
+          {isOpen && <DropdownMenu />}
         </Nav>
       </ButtonWrapper>
       <NoteWrapper>

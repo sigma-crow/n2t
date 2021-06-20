@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -34,17 +34,16 @@ const Wrapper = styled.div`
   }
 `;
 
-const DropdownMenu = (props) => {
-  const [note, setNote] = React.useState({title: ''});
+const DropdownMenu = () => {
+  const [note, setNote] = useState({title: ''});
   const handleChange = (e) => {
     setNote({...note, [e.target.name]: e.target.value});
   };
   const addNote = () => {
-    props.addNote(note);
     handleClose();
     setNote({title: ''});
   };
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const handleOpen = () => {
     setOpen(true);
   };
@@ -60,7 +59,7 @@ const DropdownMenu = (props) => {
       </DropDownMenuContainer>
 
       <Dialog onClose={handleClose} open={open}>
-        <DialogTitle it='form-dialog-title'>New Note</DialogTitle>
+        <DialogTitle>New Private Note</DialogTitle>
         <DialogContent>
           <TextField
             value={note.title}

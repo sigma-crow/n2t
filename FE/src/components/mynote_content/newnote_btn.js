@@ -1,12 +1,13 @@
 import styled from 'styled-components';
 import {FaPlus} from 'react-icons/fa';
-import React from 'react';
+import React, {useState} from 'react';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
+import {createNote} from '@api/';
 
 const NewLabel = styled.div`
   color: #987c7c;
@@ -30,32 +31,38 @@ const NewLabel = styled.div`
   }
 `;
 const NewNoteBtn = (props) => {
-  const [note, setNote] = React.useState({title: ''});
+  const {isPublic, setSend} = props;
+  const [open, setOpen] = useState(false);
+  const [note, setNote] = useState({title: ''});
   const handleChange = (e) => {
     setNote({...note, [e.target.name]: e.target.value});
   };
   const addNote = () => {
-    props.addNote(note);
-    handleClose();
+    createNote({isPublic, noteName: note.title}).then((data) => {
+      const {result, message} = data;
+      if (!result) {
+        alert(message);
+      }
+    });
     setNote({title: ''});
+    handleOpenClose();
+    setSend(true);
   };
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => {
-    setOpen(true);
+
+  const handleOpenClose = () => {
+    setOpen(!open);
   };
-  const handleClose = () => {
-    setOpen(false);
-  };
+
   return (
     <>
-      <NewLabel onClick={handleOpen}>
+      <NewLabel onClick={handleOpenClose}>
         <span>
           <FaPlus />
         </span>
         New
       </NewLabel>
-      <Dialog onClose={handleClose} open={open}>
-        <DialogTitle>New Note</DialogTitle>
+      <Dialog onClose={handleOpenClose} open={open}>
+        <DialogTitle>New Public Note</DialogTitle>
         <DialogContent>
           <TextField
             value={note.title}
@@ -66,10 +73,11 @@ const NewNoteBtn = (props) => {
           />
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={handleClose} color='primary'>
+          <Button autoFocus onClick={handleOpenClose} color='primary'>
             취소
           </Button>
           <Button autoFocus onClick={addNote} color='primary'>
+            {/* 여기서 노트 추가 */}
             추가
           </Button>
         </DialogActions>
