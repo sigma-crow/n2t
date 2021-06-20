@@ -23,3 +23,12 @@ export const singUp = async (params) => {
 export const googleLogin = async () => {
   await axios.get('/api/auth/google');
 };
+export const getNoteById = async (idx) => {
+  const {data} = await axios.get(`/api/note/getnoteby/${idx}`);
+  return data;
+};
+
+export const updateNote = async (params) => {
+  const {data} = await axios.patch('/api/note/update', params);
+  return data;
+};
